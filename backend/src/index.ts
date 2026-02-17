@@ -1,10 +1,11 @@
 import express from 'express';
 import { clerkMiddleware } from '@clerk/express'
 import cors from 'cors';
-import { ENV } from "./config/env";
+import { ENV, } from "./config/env";
 
 
 const app=express();
+
 app.use(cors({origin:ENV.FRONTEND_URL}))
 //we are using clerk middleware to protect our routes and make sure only authenticated users can access them
 app.use(clerkMiddleware())
