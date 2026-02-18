@@ -20,16 +20,24 @@ export const getUserById= async(id:string)=>{
     return db.query.users.findFirst({where: eq(users.id,id)});
 }
 export const updateUser= async(id:string,data:Partial<NewUser>)=>{
+    const existingUser = await getUserById(id);
+    if(!existingUser){
+        throw new Error('User not found');
+    }
     const [user]=await db.update(users).set(data).where(eq(users.id,id)).returning();
     return user;
 }
 //this is either create or update as we are calling both functions in this function
 export const upsertUser= async(data:NewUser)=>{
-    const existingUser = await getUserById(data.id);
-    if(existingUser){
-        return updateUser(data.id,data);
-    }
-    return createUser(data);
+    const [user] = await db.insert(users).values(data).onConflictDoUpdate({
+        target:users.id,set:data,}).returning();
+        return user;
+    // const existingUser = await getUserById(data.id);
+    // if(existingUser){
+    //     return updateUser(data.id,data);
+    // }
+    // return createUser(data);
+
 
 }
 // product querries
@@ -79,10 +87,18 @@ export const getAllProducts= async()=>{
  //partial meaning the whole may not need to be updated 
  //set data is the new data we want to update 
  export const updateProduct= async(id:string,data:Partial<NewProduct>)=>{
+    const existingProduct = await getProductById(id);
+    if(!existingProduct){
+        throw new Error('Product not found');
+    }
     const [product]=await db.update(products).set(data).where(eq(products.id,id)).returning();
     return product;
 }
 export const deleteProduct= async(id:string)=>{
+    const existingProduct = await getProductById(id);
+    if(!existingProduct){
+        throw new Error('Product not found');
+    }
     const [product]=await db.delete(products).where(eq(products.id,id)).returning();
     return product;
 };
@@ -95,6 +111,10 @@ export const createComment= async (data:NewComment)=>{
 } 
 // it is to delete the comment
 export const deleteComment= async(id:string)=>{
+    const existingComment = await getCommentsById(id);
+    if(!existingComment){
+        throw new Error('Comment not found');
+    }
     const [comment]=await db.delete(comments).where(eq(comments.id,id)).returning();
     return comment;
 }
