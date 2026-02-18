@@ -19,5 +19,6 @@ pool.on("error",(err)=>{
     console.error(" 💣 Database connection error:",err);
 })
 
+//this will help us to interact with our database using drizzle
 export const db=drizzle({client:pool, schema});
 //connection pool is used to manage multiple connections to the database and drizzle is used to interact with the database using our defined schema
