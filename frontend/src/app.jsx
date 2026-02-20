@@ -1,43 +1,31 @@
-import { useState } from 'preact/hooks'
-import preactLogo from './assets/preact.svg'
-import viteLogo from '/vite.svg'
-import './app.css'
+import { SignedIn, SignedOut, SignIn, SignInButton, SignOutButton } from '@clerk/clerk-react'
+import React from 'react'
+import { Route, Routes } from 'react-router'
+import Navbar from './components/Navbar'
+import ProductPage from './pages/ProductPage'
+import HomePage from './pages/HomePage'
+import ProfilePage from './pages/ProfilePage'
+import CreatePage from './pages/CreatePage'
+import EditProductPage from './pages/EditProductPage'
 
-export function App() {
-  const [count, setCount] = useState(0)
-
+const app = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://preactjs.com" target="_blank">
-          <img src={preactLogo} class="logo preact" alt="Preact logo" />
-        </a>
-      </div>
-      <h1>Vite + Preact</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/app.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p>
-        Check out{' '}
-        <a
-          href="https://preactjs.com/guide/v10/getting-started#create-a-vite-powered-preact-app"
-          target="_blank"
-        >
-          create-preact
-        </a>
-        , the official Preact + Vite starter
-      </p>
-      <p class="read-the-docs">
-        Click on the Vite and Preact logos to learn more
-      </p>
-    </>
+    <div className="min-h-screen bg-base-100">
+      <Navbar/>
+      <main className='max-w-5xl mx-auto px-4 py-8'>
+        {/* //these are out diffrent pages */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/create" element={<CreatePage />} />
+          <Route path="/edit/:id" element={<EditProductPage />} />
+
+        </Routes>
+      </main>
+      
+    </div>
   )
 }
+
+export default app
