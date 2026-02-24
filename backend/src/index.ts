@@ -7,8 +7,8 @@ import userRoutes from "./routes/userRoutes"
 import productRoutes from "./routes/productRoutes"
 import commentRoutes from "./routes/commentsRoutes"
 const app=express();
-
-app.use(cors({origin:ENV.FRONTEND_URL}))
+//to let frontend access our backend and send cookies for authentication we need to enable cors with credentials and specify the frontend url as origin
+app.use(cors({origin:ENV.FRONTEND_URL,credentials:true}))
 //we are using clerk middleware to protect our routes and make sure only authenticated users can access them
 app.use(clerkMiddleware())
 app.use(express.json()) //to parse json body from request
