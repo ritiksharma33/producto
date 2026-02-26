@@ -106,3 +106,12 @@ export const getCommentsById= async(id:string)=>{
         with:{user:true}
     })
  }
+ // Add this new function to find a SINGLE comment by its primary key
+export const getCommentByItsOwnId = async (id: string) => {
+  // NOTE: Adjust the 'comments' and 'eq' imports based on your Drizzle schema setup
+  const result = await db.query.comments.findFirst({
+    where: (comments, { eq }) => eq(comments.id, id),
+  });
+  
+  return result; 
+};

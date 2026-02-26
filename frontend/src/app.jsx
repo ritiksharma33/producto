@@ -27,7 +27,7 @@ const app = () => {
         {/* //these are out diffrent pages */}
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/product/:id" element={isSignedIn?<ProductPage />:<Navigate to={"/"}/>} />
           <Route path="/profile" element={isSignedIn?<ProfilePage />:<Navigate to={"/"}/>} />
           {/* if user signed in then only open this page else navigate to the signin tab home tab  we haev protected all the pages*/}
           <Route path="/create" element={isSignedIn?<CreatePage />:<Navigate to={"/"}/>} />
