@@ -14,7 +14,7 @@ export const syncUser= async(userData)=>{
     return data;
  }
  //get single product
-export const getProduct= async(id)=>{
+export const getProductById= async(id)=>{
     const {data}=await api.get(`/products/${id}`);
     return data;
 }
@@ -40,12 +40,12 @@ export const deleteProduct= async(id)=>{
 }
 //COMMENTS API
 //CREATE COMMENT
-export const createComment= async(productId,content)=>{
-    const {data}=await api.post(`/products/${productId}/comments`,{content});
-    return data;
-}
-//Delete comment
-export const deleteComment= async(commentId)=>{
-    const {data}=await api.delete(`comments/${commentId}`);
-    return data;
-}
+export const createComment = async ({ productId, content }) => {
+  const { data } = await api.post(`/comments/${productId}`, { content });
+  return data;
+};
+
+export const deleteComment = async ({ commentId }) => {
+  const { data } = await api.delete(`/comments/${commentId}`);
+  return data;
+};
