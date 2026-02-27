@@ -73,7 +73,7 @@ export const createProduct= async(req:Request,res:Response)=>{
             userId
         });
         //resource has been created
-        res.status(201).json({product});
+        res.status(201).json(product);
     }
     catch(error){
         console.error("Error creating product:",error);
@@ -110,7 +110,8 @@ export const updateProduct= async(req:Request,res:Response)=>{
             imageUrl,
          
         });
-        res.status(200).json({product});
+        //we are passing the whole object with this {}
+        res.status(200).json(product);
     }
     catch(error){
         console.error("Error updating product:",error);

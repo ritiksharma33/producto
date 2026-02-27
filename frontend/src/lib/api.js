@@ -29,10 +29,16 @@ export const createProduct= async(productData)=>{
     return data;
 }
 //UPDATE PRODUCT
-export const updateProduct= async(id,...productData)=>{
-    const {data}=await api.put(`/products/${id}`,productData);
-    return data;
-}
+
+export const updateProduct = async ({ id, ...productData }) => {
+  const { data } = await api.put(`/products/${id}`, productData);
+  return data;
+};
+//====
+// export const updateProduct= async(id,...productData)=>{
+//     const {data}=await api.put(`/products/${id}`,productData);
+//     return data;
+// }
 //DELETE PRODUCT
 export const deleteProduct= async(id)=>{
     const {data}=await api.delete(`/products/${id}`);
