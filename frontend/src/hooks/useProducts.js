@@ -52,7 +52,7 @@ export const useDeleteProduct = () => {
   });
 };
 
-//for updating 
+//for updating for the updating screen 
 export const useUpdateProduct = () => {
   const queryClient = useQueryClient();
 
