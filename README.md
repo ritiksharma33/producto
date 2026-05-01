@@ -2,7 +2,7 @@
 "A seamless bridge between product management and elegant presentation."
 
 **Producto** is a full-stack web application designed for creators and businesses to showcase their offerings. Built with a focus on speed and security, it leverages **Clerk** for identity management and **Next.js** for a lightning-fast user experience.
------
+
 
 ## 📺 Product Preview
 
